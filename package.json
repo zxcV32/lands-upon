@@ -1,0 +1,23 @@
+{
+  "name": "roads-upon",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eleventy.js",
+  "scripts": {
+    "start": "npx eleventy --serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arpitbatra123/roads-upon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arpitbatra123/roads-upon/issues"
+  },
+  "homepage": "https://github.com/arpitbatra123/roads-upon#readme",
+  "dependencies": {
+    "@11ty/eleventy": "^0.12.1"
+  }
+}
