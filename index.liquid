@@ -4,16 +4,24 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>the roads i've walked upon</title>
+    <title>the lands i've walked upon</title>
     <link rel="stylesheet" href="/styles/index.css" />
   </head>
   <body>
     <main>
-      <h1 class="heading">the roads i've walked upon</h1>
+      <h1 class="heading">the lands i've walked upon</h1>
       <p class="poem">
         the woods were lovely dark and deep, <br />
         but i had promises to keep
       </p>
+      <ul role="list">
+        {% for image in images reversed %}
+        <!-- Empty image alts until i can find a better way to caption them -->
+        <li class="item">
+          <img src="./assets/images/{{ image }}" loading="lazy" alt="" />
+        </li>
+        {% endfor %}
+      </ul>
     </main>
   </body>
 </html>

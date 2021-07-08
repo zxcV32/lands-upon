@@ -8,7 +8,8 @@
     "serve": "concurrently 'eleventy --serve' 'npm run sass:watch'",
     "sass": "sass styles/:_site/styles/ --no-source-map --style=compressed --update",
     "sass:watch": "npm run sass && npm run sass -- -w",
-    "clean": "rm -rf _site"
+    "clean": "rm -rf _site",
+    "order": "bash order.sh assets/images"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   "dependencies": {
     "@11ty/eleventy": "^0.12.1",
     "concurrently": "^6.2.0",
+    "exifer": "^1.0.0-beta.2",
     "sass": "^1.35.1"
   }
 }
