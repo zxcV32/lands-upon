@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>the lands i've walked upon</title>
     <link rel="stylesheet" href="/styles/index.css" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- <link rel="alternate icon" href="/favicon.ico" /> -->
+    <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff8a01" /> -->
   </head>
   <body>
     <main>
@@ -14,11 +18,17 @@
         the woods were lovely dark and deep, <br />
         but i had promises to keep
       </p>
-      <ul role="list">
+      <ul role="list" class="timeline">
         {% for image in images reversed %}
         <!-- Empty image alts until i can find a better way to caption them -->
         <li class="item">
-          <img src="./assets/images/{{ image }}" loading="lazy" alt="" />
+          <img src="./assets/images/{{ image.file }}" loading="lazy" alt="" />
+          <!-- @todo: hide token-->
+          <img
+            src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/{{image.gps.longitude}},{{image.gps.latitude}},15,0/300x200?access_token=pk.eyJ1IjoiYXJwaXRiYXRyYTEyMyIsImEiOiJja2Q2N3ViMGkwbzgzMnFuem55NG10OHNqIn0.zoeIkNpnI16a6Vz69A1UCA&attribution=false&logo=false"
+            loading="lazy"
+            alt=""
+          />
         </li>
         {% endfor %}
       </ul>

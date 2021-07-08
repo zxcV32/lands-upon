@@ -5,7 +5,7 @@
   "main": ".eleventy.js",
   "scripts": {
     "build": "eleventy && npm run sass",
-    "serve": "concurrently 'eleventy --serve' 'npm run sass:watch'",
+    "serve": "concurrently  'eleventy --serve' 'npm run sass:watch' --success",
     "sass": "sass styles/:_site/styles/ --no-source-map --style=compressed --update",
     "sass:watch": "npm run sass && npm run sass -- -w",
     "clean": "rm -rf _site",
@@ -24,8 +24,11 @@
   "homepage": "https://github.com/arpitbatra123/roads-upon#readme",
   "dependencies": {
     "@11ty/eleventy": "^0.12.1",
+    "@exifer/exif": "^1.0.0-beta.2",
+    "@exifer/gps": "^1.0.0-beta.2",
     "concurrently": "^6.2.0",
     "exifer": "^1.0.0-beta.2",
+    "fast-exif": "^1.0.1",
     "sass": "^1.35.1"
   }
 }

@@ -1,20 +1,38 @@
-const fs = require('fs'),
+const fs = require('fs').promises,
   path = require('path'),
-  IMAGE_EXTENSIONS = ['jpeg', 'jpg', 'png'];
+  exif = require('fast-exif');
 
-module.exports = function getImages() {
-  return new Promise((resolve, reject) => {
-    fs.readdir(path.resolve('assets/images'), (err, files) => {
-      if (err) {
-        return reject(err);
-      }
+// https://stackoverflow.com/questions/1140189/converting-latitude-and-longitude-to-decimal-values
+function ConvertDMSToDD(direction, degrees, minutes, seconds) {
+  var dd = degrees + minutes / 60 + seconds / (60 * 60);
 
-      files = files.filter((file) => {
-        const extension = file.split('.')[1];
-        return IMAGE_EXTENSIONS.includes(extension);
-      });
+  if (direction == 'S' || direction == 'W') {
+    dd = dd * -1;
+  } // Don't do anything for N or E
+  return dd;
+}
 
-      return resolve(files);
-    });
+function processLocationInfo(tags) {
+  const gps = {
+    latitude: ConvertDMSToDD(tags.gps.GPSLatitudeRef, ...tags.gps.GPSLatitude),
+    longitude: ConvertDMSToDD(tags.gps.GPSLongitudeRef, ...tags.gps.GPSLongitude)
+  };
+
+  return gps;
+}
+
+module.exports = async function getImages() {
+  let files = await fs.readdir(path.resolve('assets/images'));
+
+  files = files.map(async (file) => {
+    const tags = await exif.read(path.resolve(`assets/images/${file}`));
+    return {
+      file,
+      gps: processLocationInfo(tags)
+    };
   });
+
+  const finalData = await Promise.all(files);
+
+  return finalData;
 };
