@@ -1,0 +1,15 @@
+@import "_reset.scss";
+@import "fonts.scss";
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    .heading {
+        font-family: "Jost", Arial, Helvetica, sans-serif;
+    }
+    .poem {
+        font-family: "Space Mono", monospace;
+        margin-top: 2rem;
+    }
+}

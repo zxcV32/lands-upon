@@ -1,8 +1,8 @@
-module.exports = (config) => {
+module.exports = (eleventyConfig) => {
+  eleventyConfig.addPassthroughCopy('favicon.ico');
+  eleventyConfig.addPassthroughCopy('assets');
   return {
-    dir: {
-      input: 'src',
-      output: 'dist'
-    }
+    // Use liquid in html templates
+    htmlTemplateEngine: 'liquid'
   };
 };
