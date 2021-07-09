@@ -12,7 +12,15 @@ function ConvertDMSToDD(direction, degrees, minutes, seconds) {
   return dd;
 }
 
-function processLocationInfo(tags) {
+function processLocationInfo(file, tags) {
+  if (!tags.gps) {
+    console.log(`${file} has no gps info available`);
+    return {
+      latitude: undefined,
+      longitude: undefined
+    };
+  }
+
   const gps = {
     latitude: ConvertDMSToDD(tags.gps.GPSLatitudeRef, ...tags.gps.GPSLatitude),
     longitude: ConvertDMSToDD(tags.gps.GPSLongitudeRef, ...tags.gps.GPSLongitude)
@@ -28,7 +36,7 @@ module.exports = async function getImages() {
     const tags = await exif.read(path.resolve(`assets/images/${file}`));
     return {
       file,
-      gps: processLocationInfo(tags)
+      gps: processLocationInfo(file, tags)
     };
   });
 
