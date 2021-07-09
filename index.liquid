@@ -25,6 +25,9 @@
         <li class="item">
           <div class="photo">
             <img src="./assets/images/{{ image.file }}" loading="lazy" alt="" />
+            <span>
+              {{ image.date | date: "%e %B %Y" }}
+            </span>
           </div>
           <div class="map">
             <!-- @todo: hide token-->

@@ -8,7 +8,7 @@ body {
 main {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px 0 0 60px;
+  padding: 20px 0 20px 60px;
   .heading {
     font-family: 'Jost', Arial, Helvetica, sans-serif;
   }
@@ -41,6 +41,16 @@ main {
       box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
       // @todo: possible performance issues
       transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      position: relative;
+
+      span {
+        position: absolute;
+        bottom: 10px;
+      }
 
       img {
         padding: 10px 10px 50px 10px;

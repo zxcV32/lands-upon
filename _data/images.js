@@ -41,6 +41,7 @@ module.exports = async function getImages() {
   files = files.map(async (file) => {
     const tags = await exif.read(path.resolve(`assets/images/${file}`));
     const gps = processLocationInfo(file, tags);
+    const date = tags && tags.exif && new Date(tags.exif.DateTimeOriginal);
 
     let name;
     if (gps) {
@@ -50,12 +51,15 @@ module.exports = async function getImages() {
     return {
       file,
       gps,
-      name
+      name,
+      date
     };
   });
 
+  // @todo: can we pipe these together?
   let finalData = await Promise.all(files);
   finalData = finalData.filter((item) => item.gps);
+  finalData = finalData.sort((a, b) => a.date.getTime() - b.date.getTime());
 
   return finalData;
 };
