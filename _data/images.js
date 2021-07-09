@@ -1,6 +1,7 @@
 const fs = require('fs').promises,
   path = require('path'),
-  exif = require('fast-exif');
+  exif = require('fast-exif'),
+  got = require('got');
 
 // https://stackoverflow.com/questions/1140189/converting-latitude-and-longitude-to-decimal-values
 function ConvertDMSToDD(direction, degrees, minutes, seconds) {
@@ -13,12 +14,9 @@ function ConvertDMSToDD(direction, degrees, minutes, seconds) {
 }
 
 function processLocationInfo(file, tags) {
-  if (!tags.gps) {
+  if (!tags || !tags.gps || !tags.gps.GPSLatitudeRef) {
     console.log(`${file} has no gps info available`);
-    return {
-      latitude: undefined,
-      longitude: undefined
-    };
+    return;
   }
 
   const gps = {
@@ -29,18 +27,35 @@ function processLocationInfo(file, tags) {
   return gps;
 }
 
+async function getLocationName(gps) {
+  const response = await got(
+    `https://api.mapbox.com/geocoding/v5/mapbox.places/${gps.longitude},${gps.latitude}.json?access_token=pk.eyJ1IjoiYXJwaXRiYXRyYTEyMyIsImEiOiJja2Q2N3ViMGkwbzgzMnFuem55NG10OHNqIn0.zoeIkNpnI16a6Vz69A1UCA`
+  ).json();
+
+  return response.features[1].place_name;
+}
+
 module.exports = async function getImages() {
   let files = await fs.readdir(path.resolve('assets/images'));
 
   files = files.map(async (file) => {
     const tags = await exif.read(path.resolve(`assets/images/${file}`));
+    const gps = processLocationInfo(file, tags);
+
+    let name;
+    if (gps) {
+      name = await getLocationName(gps);
+    }
+
     return {
       file,
-      gps: processLocationInfo(file, tags)
+      gps,
+      name
     };
   });
 
-  const finalData = await Promise.all(files);
+  let finalData = await Promise.all(files);
+  finalData = finalData.filter((item) => item.gps);
 
   return finalData;
 };

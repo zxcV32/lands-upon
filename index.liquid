@@ -21,16 +21,26 @@
       <ul role="list" class="timeline">
         {% for image in images reversed %}
         <!-- Empty image alts until i can find a better way to caption them -->
+        {% if image.gps.longitude %}
         <li class="item">
-          <img src="./assets/images/{{ image.file }}" loading="lazy" alt="" />
-          <!-- @todo: hide token-->
-          <img
-            src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/{{image.gps.longitude}},{{image.gps.latitude}},15,0/400x300?access_token=pk.eyJ1IjoiYXJwaXRiYXRyYTEyMyIsImEiOiJja2Q2N3ViMGkwbzgzMnFuem55NG10OHNqIn0.zoeIkNpnI16a6Vz69A1UCA&attribution=false&logo=false"
-            loading="lazy"
-            alt=""
-          />
+          <div class="photo">
+            <img src="./assets/images/{{ image.file }}" loading="lazy" alt="" />
+          </div>
+          <div class="map">
+            <!-- @todo: hide token-->
+            <img
+              src="https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/static/{{ image.gps.longitude }},{{
+                image.gps.latitude
+              }},15,0/300x200@2x?access_token=pk.eyJ1IjoiYXJwaXRiYXRyYTEyMyIsImEiOiJja2Q2N3ViMGkwbzgzMnFuem55NG10OHNqIn0.zoeIkNpnI16a6Vz69A1UCA&attribution=false&logo=false"
+              loading="lazy"
+              alt=""
+            />
+            <span>
+              {{ image.name }}
+            </span>
+          </div>
         </li>
-        {% endfor %}
+        {% endif %} {% endfor %}
       </ul>
     </main>
   </body>
