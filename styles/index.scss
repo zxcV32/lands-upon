@@ -1,44 +1,70 @@
 @import '_reset.scss';
 @import 'fonts.scss';
+@import 'mixins.scss';
 
 body {
   background: #fff;
+  font-family: 'Space Mono', monospace;
 }
 
 main {
-  max-width: 1200px;
+  max-width: 70vw;
+  padding: 20px 0;
   margin: 0 auto;
-  padding: 20px 0 20px 60px;
+
+  @include mobile {
+    max-width: 90vw;
+  }
+
   .heading {
     font-family: 'Jost', Arial, Helvetica, sans-serif;
   }
+
   .poem {
     font-family: 'Space Mono', monospace;
     margin-top: 2rem;
   }
+
   .timeline {
     margin-top: 2rem;
   }
 
   ul > * + * {
     margin-top: 5rem;
+
+    @include mobile {
+      margin-top: 4rem;
+    }
   }
 
   .item {
-    display: flex;
-    align-items: flex-end;
+    display: grid;
+    grid-template-columns: 400px 400px;
     gap: 2rem;
-    flex-wrap: wrap;
-    img {
-      max-width: min(90vw, 400px);
-      display: inline-flex;
+    align-items: end;
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: 1rem;
     }
+
+    @include tablet {
+      grid-template-columns: 1fr 1fr;
+    }
+
     span {
       font-family: 'Space Mono', monospace;
+      font-size: 14px;
+
+      @include mobile {
+        font-size: 12px;
+      }
     }
+
     .photo {
       background: #f8f8f8;
       box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
       // @todo: possible performance issues
       transition: all 0.3s;
       display: flex;
@@ -49,7 +75,12 @@ main {
 
       span {
         position: absolute;
-        bottom: 10px;
+        bottom: 15px;
+        font-size: 14px;
+
+        @include mobile {
+          font-size: 12px;
+        }
       }
 
       img {

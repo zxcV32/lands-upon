@@ -19,8 +19,8 @@
         but i had promises to keep
       </p>
       <ul role="list" class="timeline">
-        {% for image in images reversed %}
         <!-- Empty image alts until i can find a better way to caption them -->
+        {% for image in images reversed %}
         {% if image.gps.longitude %}
         <li class="item">
           <div class="photo">
