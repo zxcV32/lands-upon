@@ -20,13 +20,12 @@
       </p>
       <ul role="list" class="timeline">
         <!-- Empty image alts until i can find a better way to caption them -->
-        {% for image in images reversed %}
-        {% if image.gps.longitude %}
+        {% for image in images reversed %} {% if image.gps.longitude %}
         <li class="item">
           <div class="photo">
             <img src="./assets/images/{{ image.file }}" loading="lazy" alt="" />
             <span>
-              {{ image.date | date: "%e %B %Y" }}
+              {{ image.date | date: '%e %B %Y' }}
             </span>
           </div>
           <div class="map">
@@ -46,5 +45,6 @@
         {% endif %} {% endfor %}
       </ul>
     </main>
+    <script src="./script.js"></script>
   </body>
 </html>
