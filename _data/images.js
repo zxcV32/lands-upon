@@ -1,7 +1,8 @@
 const fs = require('fs').promises,
   path = require('path'),
   exif = require('fast-exif'),
-  got = require('got');
+  got = require('got'),
+  Image = require('@11ty/eleventy-img');
 
 // https://stackoverflow.com/questions/1140189/converting-latitude-and-longitude-to-decimal-values
 function ConvertDMSToDD(direction, degrees, minutes, seconds) {
@@ -52,7 +53,8 @@ module.exports = async function getImages() {
       file,
       gps,
       name,
-      date
+      date,
+      gpsImage: `https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/static/${gps.longitude},${gps.latitude},15,0/300x200@2x?access_token=pk.eyJ1IjoiYXJwaXRiYXRyYTEyMyIsImEiOiJja2Q2N3ViMGkwbzgzMnFuem55NG10OHNqIn0.zoeIkNpnI16a6Vz69A1UCA&attribution=false&logo=false`
     };
   });
 

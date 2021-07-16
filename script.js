@@ -7,12 +7,11 @@ let observer = new IntersectionObserver((entries, observer) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       let elem = entry.target;
-      elem.parentElement.classList.toggle('tilted');
-      elem.classList.toggle('polaroid');
+      elem.classList.toggle('tilted');
     }
   });
 }, options);
 
 window.onload = () => {
-  document.querySelectorAll('.photo img').forEach((target) => observer.observe(target));
+  document.querySelectorAll('.photo').forEach((target) => observer.observe(target));
 };
