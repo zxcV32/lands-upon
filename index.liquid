@@ -20,24 +20,17 @@
       </p>
       <ul role="list" class="timeline">
         <!-- Empty image alts until i can find a better way to caption them -->
-        {% for image in images reversed %}
-        {% if image.gps.longitude %}
+        {% for image in images reversed %} {% if image.gps.longitude %}
         <li class="item">
           <div class="photo">
-            <img src="./assets/images/{{ image.file }}" loading="lazy" alt="" />
+            {% image image.file , "" %}
             <span>
-              {{ image.date | date: "%e %B %Y" }}
+              {{ image.date | date: '%e %B %Y' }}
             </span>
           </div>
           <div class="map">
             <!-- @todo: hide token-->
-            <img
-              src="https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/static/{{ image.gps.longitude }},{{
-                image.gps.latitude
-              }},15,0/300x200@2x?access_token=pk.eyJ1IjoiYXJwaXRiYXRyYTEyMyIsImEiOiJja2Q2N3ViMGkwbzgzMnFuem55NG10OHNqIn0.zoeIkNpnI16a6Vz69A1UCA&attribution=false&logo=false"
-              loading="lazy"
-              alt=""
-            />
+            <img src="{{ image.gpsImage }}" loading="lazy" alt="" />
             <span>
               {{ image.name }}
             </span>
@@ -46,5 +39,6 @@
         {% endif %} {% endfor %}
       </ul>
     </main>
+    <script src="./script.js"></script>
   </body>
 </html>
