@@ -7,10 +7,16 @@ body {
   font-family: 'Space Mono', monospace;
 }
 
+@media screen and (prefers-color-scheme: dark) {
+  body {
+    background-color: #212121;
+    color: #b5cfed;
+  }
+}
+
 main {
-  max-width: 70vw;
   padding: 20px 0;
-  margin: 0 auto;
+  margin-left: 140px;
 
   @include mobile {
     max-width: 90vw;
@@ -55,6 +61,7 @@ main {
     span {
       font-family: 'Space Mono', monospace;
       font-size: 14px;
+      text-align: center;
 
       @include mobile {
         font-size: 12px;
@@ -81,6 +88,10 @@ main {
         @include mobile {
           font-size: 12px;
         }
+
+        @media screen and (prefers-color-scheme: dark) {
+          color: #212121;
+        }
       }
 
       img {
@@ -100,6 +111,9 @@ main {
       display: flex;
       flex-direction: column;
       align-items: center;
+      img {
+        border-radius: 4px;
+      }
       span {
         max-width: 400px;
       }
