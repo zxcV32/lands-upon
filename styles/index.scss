@@ -10,13 +10,14 @@ body {
 @media screen and (prefers-color-scheme: dark) {
   body {
     background-color: #212121;
-    color: #b5cfed;
+    color: #c3edb5;
   }
 }
 
 main {
   padding: 20px 0;
-  margin-left: 140px;
+  width: 80vw;
+  margin: 0 auto;
 
   @include mobile {
     max-width: 90vw;
@@ -97,6 +98,14 @@ main {
       img {
         padding: 10px 10px 50px 10px;
       }
+
+      &:hover {
+        transform: rotate(5deg) scale(0.9);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+        picture {
+          filter: saturate(1.3) contrast(1.1) brightness(1.1);
+        }
+      }
     }
 
     .map {
@@ -110,13 +119,5 @@ main {
         max-width: 400px;
       }
     }
-  }
-}
-
-.tilted {
-  transform: rotate(5deg) scale(0.9);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-  picture {
-    filter: saturate(1.3) contrast(1.1) brightness(1.1);
   }
 }
