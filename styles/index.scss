@@ -36,11 +36,19 @@ main {
     margin-top: 2rem;
   }
 
-  ul > * + * {
+  .timeline > * + * {
     margin-top: 5rem;
 
     @include mobile {
       margin-top: 4rem;
+    }
+  }
+  
+  .navigation {
+    & a {
+      @media screen and (prefers-color-scheme: dark) {
+        color: #c3edb5;
+      }
     }
   }
 
