@@ -1,78 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>the lands i've walked upon</title>
-    <link rel="stylesheet" href="/styles/index.css" />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="alternate icon" href="/favicon.ico" />
-    <link rel="mask-icon" href="/favicon.svg" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>the lands i've walked upon</title>
+  <link rel="stylesheet" href="/styles/index.css" />
 
-    <!-- Primary Meta Tags -->
-    <title>the lands i've walked upon</title>
-    <meta name="title" content="the lands i've walked upon" />
-    <meta name="description" content="" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="mask-icon" href="/favicon.svg" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://lands-upon.netlify.app/" />
-    <meta property="og:title" content="the lands i've walked upon" />
-    <meta property="og:description" content="A photo blog of the lands that @arpitbatra123 has walked upon" />
-    <meta property="og:image" content="https://lands-upon.netlify.app/og.jpg" />
+  <!-- Primary Meta Tags -->
+  <title>the lands i've walked upon</title>
+  <meta name="title" content="the lands i've walked upon" />
+  <meta name="description" content="" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://lands-upon.netlify.app/" />
-    <meta name="twitter:creator" content="@arpitbatra123" />
-    <meta property="twitter:title" content="the lands i've walked upon" />
-    <meta property="twitter:description" content="A photo blog of the lands that @arpitbatra123 has walked upon" />
-    <meta property="twitter:image" content="https://lands-upon.netlify.app/og.jpg" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lands-upon.netlify.app/" />
+  <meta property="og:title" content="the lands i've walked upon" />
+  <meta property="og:description" content="A photo blog of the lands that @arpitbatra123 has walked upon" />
+  <meta property="og:image" content="https://lands-upon.netlify.app/og.jpg" />
 
-    <!-- Theme color -->
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://lands-upon.netlify.app/" />
+  <meta name="twitter:creator" content="@arpitbatra123" />
+  <meta property="twitter:title" content="the lands i've walked upon" />
+  <meta property="twitter:description" content="A photo blog of the lands that @arpitbatra123 has walked upon" />
+  <meta property="twitter:image" content="https://lands-upon.netlify.app/og.jpg" />
 
-    <!-- Analytics -->
-    <script async src="https://cdn.splitbee.io/sb.js"></script>
-  </head>
-  <body>
-    <main>
-      <h1 class="heading">the lands i've walked upon</h1>
-      <nav>
-        <ul role="list" class='navigation'>
-          <li><a href="https://github.com/arpitbatra123/lands-upon">view source on github</a></li>
-          <li><a href="https://twitter.com/arpitbatra123">my twitter</a></li>
-          <li><a href="https://arpit.tk/">my website</a></li>
-        </ul>
-      </nav>
-      <p class="poem">
-        the woods were lovely dark and deep, <br />
-        but i had promises to keep
-      </p>
-      <ul role="list" class="timeline">
-        <!-- Empty image alts until i can find a better way to caption them -->
-        {% for image in images reversed %} {% if image.gps.longitude %}
-        <li class="item">
-          <div class="photo">
-            {% image image.file , "" %}
-            <span>
-              {{ image.date | date: '%e %B %Y' }}
-            </span>
-          </div>
-          <div class="map">
-            <!-- @todo: hide token-->
-            <img src="{{ image.gpsImage }}" loading="lazy" alt="" />
-            <span>
-              {{ image.name }}
-            </span>
-          </div>
-        </li>
-        {% endif %} {% endfor %}
+  <!-- Theme color -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
+
+  <!-- Analytics -->
+  <script async src="https://cdn.splitbee.io/sb.js"></script>
+</head>
+
+<body>
+  <main>
+    <h1 class="heading">the lands i've walked upon</h1>
+    <nav>
+      <ul role="list" class='navigation'>
+        <li><a href="https://github.com/arpitbatra123/lands-upon">view source on github</a></li>
+        <li><a href="https://twitter.com/arpitbatra123">my twitter</a></li>
+        <li><a href="https://arpit.tk/">my website</a></li>
       </ul>
-    </main>
-    <script src="./script.js"></script>
-  </body>
+    </nav>
+    <p class="poem">
+      the woods were lovely dark and deep, <br />
+      but i had promises to keep
+    </p>
+    <ul role="list" class="timeline">
+      <!-- Empty image alts until i can find a better way to caption them -->
+      {% for image in images reversed %} {% if image.gps.longitude %}
+      <li class="item">
+        <div class="photo">
+          <img src="/assets/images/{{ image.file }}" loading="lazy" alt="" />
+          <span>
+            {{ image.date | date: '%e %B %Y' }}
+          </span>
+        </div>
+        <div class="map">
+          <!-- @todo: hide token-->
+          <img src="{{ image.gpsImage }}" loading="lazy" alt="{{ image.name }}" />
+          <span>
+            {{ image.name }}
+          </span>
+        </div>
+      </li>
+      {% endif %} {% endfor %}
+    </ul>
+  </main>
+  <script src=" ./script.js"></script>
+</body>
+
 </html>
