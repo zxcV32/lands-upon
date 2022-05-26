@@ -57,7 +57,7 @@
     <ul role="list" class="timeline">
       <!-- Empty image alts until i can find a better way to caption them -->
       {% for image in images reversed %} {% if image.gps.longitude %}
-      <li class="item">
+      <li class="item" id="{{image.file}}">
         <div class="photo">
           <img src="/assets/images/{{ image.file }}" loading="lazy" alt="" />
           <span>
