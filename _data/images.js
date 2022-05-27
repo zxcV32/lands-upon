@@ -2,7 +2,25 @@ const fs = require('fs').promises,
     path = require('path'),
     exif = require('fast-exif'),
     got = require('got'),
-    IMAGE_EXTENSIONS = ['jpeg', 'jpg', 'png'];
+    IMAGE_EXTENSIONS = ['jpeg', 'jpg', 'png'],
+    Feed = require('feed').Feed;
+
+const feed = new Feed({
+    title: 'Lands Upon',
+    description: 'A photo blog of the lands that @arpitbatra123 has walked upon',
+    id: 'https://lands-upon.netlify.app/',
+    link: 'https://lands-upon.netlify.app/',
+    language: 'en',
+    image: 'https://lands-upon.netlify.app/og.jpg',
+    favicon: 'https://lands-upon.netlify.app/favicon.ico',
+    feedLinks: {
+        atom: 'https://lands-upon.netlify.app/feed.xml',
+    },
+    author: {
+        name: 'Arpit Batra',
+        email: 'arpitbatra123@gmail.com',
+    }
+});
 
 // https://stackoverflow.com/questions/1140189/converting-latitude-and-longitude-to-decimal-values
 function ConvertDMSToDD(direction, degrees, minutes, seconds) {
@@ -53,6 +71,12 @@ module.exports = async function getImages() {
         let name;
         if (gps) {
             name = await getLocationName(gps);
+            feed.addItem({
+                title: file,
+                id: file,
+                link: `https://lands-upon.netlify.app/#${file}`,
+                date: new Date(date)
+            });
         }
 
         return {
@@ -66,6 +90,7 @@ module.exports = async function getImages() {
 
     let finalData = await Promise.all(files);
     finalData = finalData.filter((item) => item.gps).sort((a, b) => a.date.getTime() - b.date.getTime());
-
+    
+    fs.writeFile(path.resolve('feed.xml'), feed.rss2());
     return finalData;
 };
