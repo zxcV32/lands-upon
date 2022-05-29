@@ -14,7 +14,7 @@ const feed = new Feed({
     image: 'https://lands-upon.netlify.app/og.jpg',
     favicon: 'https://lands-upon.netlify.app/favicon.ico',
     feedLinks: {
-        atom: 'https://lands-upon.netlify.app/feed.xml',
+        rss: 'https://lands-upon.netlify.app/feed.xml',
     },
     author: {
         name: 'Arpit Batra',
@@ -76,7 +76,8 @@ module.exports = async function getImages() {
                 id: `https://lands-upon.netlify.app/${file}`,
                 link: `https://lands-upon.netlify.app/#${file}`,
                 date: new Date(date),
-                image: `https://lands-upon.netlify.app/${file}`
+                content: `<img src='https://lands-upon.netlify.app/${file}'>`,
+                description: `<img src='https://lands-upon.netlify.app/${file}'>`
             });
         }
 
