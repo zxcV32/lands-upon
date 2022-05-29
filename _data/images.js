@@ -73,7 +73,7 @@ module.exports = async function getImages() {
             name = await getLocationName(gps);
             feed.addItem({
                 title: file,
-                id: file,
+                id: `https://lands-upon.netlify.app/${file}`,
                 link: `https://lands-upon.netlify.app/#${file}`,
                 date: new Date(date),
                 image: `https://lands-upon.netlify.app/${file}`
