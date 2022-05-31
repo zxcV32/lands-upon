@@ -1,0 +1,23 @@
+FROM node as Build
+WORKDIR /src
+COPY _data/ ./_data/
+COPY assets/ ./assets/
+COPY styles/ ./styles/
+COPY .eleventy.js .
+COPY feed.xml .
+COPY index.liquid .
+COPY og.jpg .
+COPY package*.json ./
+COPY order.sh .
+COPY script.js .
+RUN npm install -g @11ty/eleventy
+RUN npm install
+RUN eleventy
+
+
+FROM nginx:stable-alpine
+WORKDIR /usr/share/nginx/html/
+RUN rm -rf *
+COPY --from=Build /src/_site .
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

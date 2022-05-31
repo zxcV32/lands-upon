@@ -1,0 +1,7 @@
+version: "3.9"
+services:
+  lands-upon:
+    build: .
+    restart: always
+    ports:
+      - 8989:80
