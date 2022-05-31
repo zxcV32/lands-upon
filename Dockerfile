@@ -10,9 +10,8 @@ COPY og.jpg .
 COPY package*.json ./
 COPY order.sh .
 COPY script.js .
-RUN npm install -g @11ty/eleventy
 RUN npm install
-RUN eleventy
+RUN npm run build
 
 
 FROM nginx:stable-alpine
