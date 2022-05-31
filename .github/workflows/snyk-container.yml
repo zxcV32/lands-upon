@@ -21,7 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build a Docker image
-      run: docker build -t zxcv32/lands-upon-as .
+      run: docker build -t zxcv32/lands-upon .
     - name: Run Snyk to check Docker image for vulnerabilities
       # Snyk can be used to break the build when it detects vulnerabilities.
       # In this case we want to upload the issues to GitHub Code Scanning
@@ -33,5 +33,5 @@ jobs:
         # or you can signup for free at https://snyk.io/login
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
-        image: zxcv32/lands-upon-as
+        image: zxcv32/lands-upon
         args: --file=Dockerfile
