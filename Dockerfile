@@ -14,7 +14,7 @@ RUN npm install
 RUN npm run build
 
 
-FROM nginx:stable-alpine
+FROM nginx:mainline-alpine
 WORKDIR /usr/share/nginx/html/
 RUN rm -rf *
 COPY --from=Build /src/_site .
